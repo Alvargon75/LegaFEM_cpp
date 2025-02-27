@@ -1,0 +1,53 @@
+#ifndef INC_SUPER_ELEMENTS_HPP
+#define INC_SUPER_ELEMENTS_HPP
+
+#include <Eigen/Core>
+
+
+// Property for 1D elements
+typedef struct {
+    double E;
+    double A;
+    double nu;
+    double J;
+    double Izz;
+    double Iyy;
+    Eigen::Matrix<double, 3, 1> j_aux;
+    double b;
+    double h;
+} PROP1D;
+
+// Intflags
+typedef enum {
+    INTFLAG_2D_FULL = 0,
+    INTFLAG_2D_REDUCEDSHEAR,
+    INTFLAG_2D_REDUCEDAXIAL,
+    INTFLAG_2D_REDUCED
+} INTFLAGS_2D;
+
+// Property for 2D elements
+typedef struct {
+    double E;
+    double h;
+    double nu;
+} PROP2D;
+
+
+class SuperElement1D
+{
+private:
+    Eigen::Matrix<double, 12, 12> K;
+    Eigen::Matrix<double, 12, 12> R;
+    double L;
+    Eigen::Matrix<double, 6, 2> u;
+    Eigen::Matrix<double, 6, 2> DOFs;
+    Eigen::Matrix<double, 2, 3> nodes;
+
+public:
+    SuperElement1D(Eigen::Matrix<double, 2, 3> nodes, PROP1D property);
+    virtual ~SuperElement1D() = default;
+};
+
+
+
+#endif

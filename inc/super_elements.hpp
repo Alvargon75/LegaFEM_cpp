@@ -33,6 +33,8 @@ typedef struct {
 } PROP2D;
 
 
+
+// Abstract class implementation for 1D element
 class SuperElement1D
 {
 private:
@@ -44,9 +46,30 @@ private:
     Eigen::Matrix<double, 2, 3> nodes;
 
 public:
-    SuperElement1D(Eigen::Matrix<double, 2, 3> nodes, PROP1D property);
+    SuperElement1D(Eigen::Matrix<double, 2, 3> nodes, PROP1D property){};
     virtual ~SuperElement1D() = default;
 };
+
+
+
+// Abstract class implementation for 2D element
+class SuperElement2D
+{
+private:
+    Eigen::Matrix<double, 24, 24> K;
+    Eigen::Matrix<double, 24, 24> R;
+    Eigen::Matrix<double, 3, 3> R_small;
+    Eigen::Matrix<double, 6, 4> DOFs;
+    Eigen::Matrix<double, 4, 3> nodes;
+    Eigen::Matrix<double, 6, 2> u;
+
+public:
+    SuperElement2D(Eigen::Matrix<double, 4, 3> nodes, PROP2D property){};
+    virtual ~SuperElement2D() = 0;
+};
+
+
+
 
 
 

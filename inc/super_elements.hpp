@@ -1,7 +1,8 @@
 #ifndef INC_SUPER_ELEMENTS_HPP
 #define INC_SUPER_ELEMENTS_HPP
 
-#include <Eigen/Core>
+#include <Eigen/Dense>
+#include <iostream>
 
 
 // Property for 1D elements
@@ -37,17 +38,23 @@ typedef struct {
 // Abstract class implementation for 1D element
 class SuperElement1D
 {
-private:
+protected:
     Eigen::Matrix<double, 12, 12> K;
     Eigen::Matrix<double, 12, 12> R;
     double L;
     Eigen::Matrix<double, 6, 2> u;
     Eigen::Matrix<double, 6, 2> DOFs;
     Eigen::Matrix<double, 2, 3> nodes;
+    PROP1D property;
+
+    // rotation matrix func, common for all 1d elems
+    void buildRotationMatrix(void);
+    virtual void buildStiffnessMatrix(void) = 0;
 
 public:
-    SuperElement1D(Eigen::Matrix<double, 2, 3> nodes, PROP1D property){};
+    SuperElement1D() = default;
     virtual ~SuperElement1D() = default;
+
 };
 
 
@@ -55,7 +62,7 @@ public:
 // Abstract class implementation for 2D element
 class SuperElement2D
 {
-private:
+protected:
     Eigen::Matrix<double, 24, 24> K;
     Eigen::Matrix<double, 24, 24> R;
     Eigen::Matrix<double, 3, 3> R_small;
@@ -64,8 +71,8 @@ private:
     Eigen::Matrix<double, 6, 2> u;
 
 public:
-    SuperElement2D(Eigen::Matrix<double, 4, 3> nodes, PROP2D property){};
-    virtual ~SuperElement2D() = 0;
+    SuperElement2D() = default;
+    virtual ~SuperElement2D() = default;
 };
 
 

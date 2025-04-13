@@ -30,7 +30,7 @@ private:
 
     // Some helper functions
     BCmat expandBCs(const BCauxmat& in);
-    DOFSmat generateDOFS(NODEmat in);
+    DOFSmat generateDOFS(const NODEmat& in);
 
 public:
     FEMcase(NODEmat nod, CONNmat con, BCauxmat bc);

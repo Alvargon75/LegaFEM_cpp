@@ -34,8 +34,10 @@ int main(){
     conn_test << 0, 1, 0, 0, 1;
 
     Elem1DBar elem1(pos, testprop);
+    Elem1DBeam elem2(pos, testprop);
 
     std::cout << elem1.getK() << std::endl;
+    std::cout << elem2.getK() << std::endl;
 
 
 

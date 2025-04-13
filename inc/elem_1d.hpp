@@ -17,4 +17,19 @@ public:
 };
 
 
+
+// Beam element
+class Elem1DBeam: public SuperElement1D
+{
+private:
+    /*nothing*/
+
+public:
+    Elem1DBeam(Eigen::Matrix<double, 2, 3> nodes_, PROP1D proper);
+    ~Elem1DBeam() = default;
+
+    void buildStiffnessMatrix() override;
+};
+
+
 #endif

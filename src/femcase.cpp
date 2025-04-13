@@ -6,9 +6,8 @@ FEMcase::FEMcase(NODEmat nod, CONNmat con, BCauxmat bc){
 
     BCs = expandBCs(bc);
 
-    std::cout << BCs << std::endl;
-
     DOFS = generateDOFS(NODES);
+
 }
 
 
@@ -44,8 +43,12 @@ BCmat FEMcase::expandBCs(const BCauxmat& in){
 }
 
 
-DOFSmat FEMcase::generateDOFS(NODEmat in){
-    
+DOFSmat FEMcase::generateDOFS(const NODEmat& in){
+    int n = in.rows();
+    Eigen::VectorXd vec = Eigen::VectorXd::LinSpaced(n*6, 1, n*6);
+    DOFSmat DOFS = Eigen::Map<Eigen::MatrixXd>(vec.data(), 6,n).transpose();
+
+    return DOFS;
 }
 
 Ktotalmat FEMcase::Assembler(void){

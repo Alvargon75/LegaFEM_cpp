@@ -33,10 +33,25 @@ typedef struct {
     double nu;
 } PROP2D;
 
+// Abstract class implementation for a general element
+class SuperElement
+{
+private:
+    /* data */
+protected:
+    Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> K;
+    Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> R;
+    Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> u;
+    Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> DOFs;
+    Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> nodes;
+public:
+    SuperElement() = default;
+    virtual ~SuperElement() = default;
+};
 
 
 // Abstract class implementation for 1D element
-class SuperElement1D
+class SuperElement1D: public SuperElement
 {
 protected:
     Eigen::Matrix<double, 12, 12> K;
@@ -54,6 +69,8 @@ protected:
 public:
     SuperElement1D() = default;
     virtual ~SuperElement1D() = default;
+
+    Eigen::Matrix<double, 12, 12> getK(void); // maybe just for debug, dunno if I'll leave this here
 
 };
 

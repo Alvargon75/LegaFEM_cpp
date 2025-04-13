@@ -59,7 +59,8 @@ $(OBJ_DIR):
 
 # Linux clean object and executable
 clean:
-	$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
+	$(RM) -rv $(OBJ_DIR)
+	$(RM) $(EXE)
 
 # Windows clean object and executable
 cleanWin:

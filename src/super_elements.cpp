@@ -32,4 +32,8 @@ void SuperElement1D::buildRotationMatrix(void){
 
 }
 
+Eigen::Matrix<double, 12, 12> SuperElement1D::getK(void){
+    return K;
+}
+
 // SUPER ELEMENT 2D GENERIC METHODS
